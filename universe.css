@@ -1,0 +1,333 @@
+/* ==========================================
+   PROJECT ASTERIA
+   Universe Scene (FIXED VERSION)
+========================================== */
+
+.universe{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background:
+        radial-gradient(circle at top,#233a82 0%,#10183c 35%,#050816 85%);
+
+    opacity: 1;
+    transition: opacity 1s ease;
+}
+
+.universe.fade-out{
+    opacity: 0;
+}
+
+/* =========================
+   STAR LAYER
+========================= */
+
+#stars-layer{
+    position:absolute;
+    inset:0;
+    overflow:hidden;
+}
+
+.bg-star{
+    position:absolute;
+    background:#fff;
+    border-radius:50%;
+
+    box-shadow:
+        0 0 8px rgba(255,255,255,.7),
+        0 0 15px rgba(255,255,255,.4);
+
+    animation: twinkle 3s ease-in-out infinite;
+
+    will-change: transform, opacity;
+}
+
+@keyframes twinkle{
+    0%,100%{
+        opacity:.2;
+        transform:scale(.6);
+    }
+    50%{
+        opacity:1;
+        transform:scale(1.8);
+    }
+}
+
+/* =========================
+   SHOOTING STAR (FIXED)
+========================= */
+
+#shooting-star{
+    position:absolute;
+    width:160px;
+    height:2px;
+
+    background:linear-gradient(to right, white, transparent);
+
+    top:15%;
+    left:-20vw;
+
+    transform: rotate(-20deg);
+
+    animation: shooting 6s linear infinite;
+
+    opacity:.8;
+
+    will-change: transform, opacity;
+}
+
+@keyframes shooting{
+    0%{
+        transform: translateX(0) rotate(-20deg);
+        opacity: 0;
+    }
+    10%{
+        opacity: 1;
+    }
+    100%{
+        transform: translateX(120vw) rotate(-20deg);
+        opacity: 0;
+    }
+}
+
+/* =========================
+   LUMI (FIX TRANSFORM CONFLICT)
+========================= */
+
+.lumi{
+    position:absolute;
+    top:18%;
+    left:50%;
+    transform:translateX(-50%);
+
+    font-size:78px;
+    color:#FFD76A;
+    z-index:20;
+
+    text-shadow:
+        0 0 8px #FFD76A,
+        0 0 25px #FFD76A,
+        0 0 60px rgba(255,215,106,.8),
+        0 0 120px rgba(255,215,106,.4);
+
+    animation:
+        float 4s ease-in-out infinite,
+        glow 2.5s ease-in-out infinite;
+
+    will-change: transform, filter;
+}
+
+/* Rotate layer tách riêng */
+.lumi::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    animation: rotateStar 10s linear infinite;
+}
+
+@keyframes rotateStar{
+    from{
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes float{
+    0%,100%{
+        transform:translateX(-50%) translateY(0);
+    }
+    50%{
+        transform:translateX(-50%) translateY(-20px);
+    }
+}
+
+@keyframes glow{
+    0%,100%{
+        filter:brightness(1);
+    }
+    50%{
+        filter:brightness(1.5);
+    }
+}
+
+/* =========================
+   DIALOG
+========================= */
+
+.dialog-box{
+    position:absolute;
+    width:85%;
+    max-width:700px;
+    left:50%;
+    bottom:180px;
+    transform:translateX(-50%);
+
+    text-align:center;
+    color:white;
+    font-size:24px;
+    line-height:1.8;
+
+    min-height:140px;
+
+    text-shadow:0 0 10px rgba(255,255,255,.3);
+}
+
+/* =========================
+   BUTTON
+========================= */
+
+#continue-btn{
+    position:absolute;
+    bottom:70px;
+    left:50%;
+    transform:translateX(-50%) translateY(30px);
+
+    padding:15px 45px;
+
+    border:none;
+    border-radius:50px;
+
+    background:linear-gradient(90deg,#6A5CFF,#FF77C8,#FFD76A);
+    color:white;
+
+    font-size:18px;
+    font-weight:600;
+
+    cursor:pointer;
+
+    opacity:0;
+    transition:.8s;
+
+    box-shadow:0 10px 30px rgba(255,215,106,.3);
+}
+
+#continue-btn.show{
+    opacity:1;
+    transform:translateX(-50%) translateY(0);
+}
+
+#continue-btn:hover{
+    transform:translateX(-50%) scale(1.08);
+    box-shadow:0 15px 45px rgba(255,215,106,.6);
+}
+
+#continue-btn:active{
+    transform:translateX(-50%) scale(.95);
+}
+
+/* =========================
+   PLANETS
+========================= */
+
+.planet{
+    position:absolute;
+    border-radius:50%;
+
+    animation:
+        planetFloat 8s ease-in-out infinite,
+        planetGlow 5s ease-in-out infinite;
+
+    box-shadow:
+        inset -20px -20px 40px rgba(0,0,0,.35),
+        0 0 25px rgba(255,255,255,.15),
+        0 0 70px rgba(255,255,255,.08);
+
+    will-change: transform, filter;
+}
+
+@keyframes planetGlow{
+    0%,100%{
+        filter:brightness(1);
+    }
+    50%{
+        filter:brightness(1.15);
+    }
+}
+
+@keyframes planetFloat{
+    0%,100%{
+        transform:translateY(0);
+    }
+    50%{
+        transform:translateY(-12px);
+    }
+}
+
+/* PLANETS */
+.planet1{
+    width:120px;
+    height:120px;
+    top:10%;
+    left:8%;
+
+    background: radial-gradient(circle at 30% 30%, #d8b5ff, #8660ff);
+}
+
+.planet2{
+    width:70px;
+    height:70px;
+    right:12%;
+    top:25%;
+
+    background: radial-gradient(circle at 30% 30%, #ffe08a, #f5a623);
+}
+
+.planet3{
+    width:190px;
+    height:190px;
+    right:-70px;
+    bottom:-70px;
+
+    background: radial-gradient(circle at 30% 30%, #6aa8ff, #234cff);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:768px){
+
+    .dialog-box{
+        width:90%;
+        font-size:18px;
+        bottom:150px;
+    }
+
+    .lumi{
+        font-size:60px;
+    }
+
+    .planet1{
+        width:90px;
+        height:90px;
+    }
+
+    .planet2{
+        width:55px;
+        height:55px;
+    }
+
+    .planet3{
+        width:140px;
+        height:140px;
+    }
+
+    #continue-btn{
+        width:80%;
+        max-width:280px;
+        font-size:16px;
+    }
+
+    #shooting-star{
+        width:120px;
+        animation-duration:5s;
+    }
+}

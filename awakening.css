@@ -1,0 +1,70 @@
+.awakening{
+
+    width:100%;
+    height:100vh;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+    align-items:center;
+
+    background:#050816;
+
+    overflow:hidden;
+
+}
+
+.lumi{
+
+    font-size:80px;
+
+    color:#FFD76A;
+
+    animation:float 3s ease-in-out infinite;
+
+    filter:drop-shadow(0 0 20px gold);
+
+}
+
+.speech{
+
+    margin-top:40px;
+
+    width:80%;
+    max-width:600px;
+
+    text-align:center;
+
+    color:white;
+
+    font-size:28px;
+
+    line-height:1.7;
+
+    min-height:120px;
+
+}
+
+@keyframes float{
+
+    0%{
+
+        transform:translateY(0px);
+
+    }
+
+    50%{
+
+        transform:translateY(-18px);
+
+    }
+
+    100%{
+
+        transform:translateY(0px);
+
+    }
+
+}
